@@ -1,15 +1,65 @@
-export const generatePublicKey = () => {
-  console.log("generatePublicKey")
+import axios, { AxiosInstance } from 'axios';
+
+export class Medal {
+  api: AxiosInstance;
+
+  /**
+   * @param token the public (pub_***) or private (priv_***) token used to authenticate the requests.
+   * @param apiVersion the version identifier used to prefix all endpoint URIs (currently only v1 is avaiable)
+   */
+  constructor(token: string, apiVersion = 'v1') {
+    this.api = axios.create({
+      baseURL: `https://developers.medal.tv/${apiVersion}`,
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
+  get categories() {
+    return this.api.get<MedalAPI.CategoryResponse>('/categories');
+  }
+
+  public latest(options?: MedalAPI.LatestOptions) {
+    return this.api.get<MedalAPI.LatestResponse>('/latest', {
+      params: {
+        ...options,
+      },
+    });
+  }
+
+  public search(options: MedalAPI.SearchOptions) {
+    return this.api.get<MedalAPI.SearchResponse>('/search', {
+      params: {
+        ...options,
+      },
+    });
+  }
+
+  public trending(options?: MedalAPI.TrendingOptions) {
+    return this.api.get<MedalAPI.TrendingResponse>('/trending', {
+      params: {
+        ...options,
+      },
+    });
+  }
 }
-export const getCategories = () => {
-  console.log("getCategories")
-}
-export const getLatest = () => {
-  console.log("getLatest")
-}
-export const getTrending = () => {
-  console.log("getTrending")
-}
-export const search = () => {
-  console.log("search")
-}
+
+/**
+ * If you are building a frontend-only application, such as our office feed, you’ll want to generate an API key for public use. You are fine to expose these to users, as their rate limits will be on a per-IP basis.
+ *
+ * Public use API keys can not be granted special privileges.
+ */
+export const generatePublicKey = async () => {
+  const response = await axios.get('https://developers.medal.tv/v1/generate_public_key');
+};
+
+/**
+ * Keys for private use can be whitelisted for special privileges. You typically deploy these in backend applications, and make sure your users don’t see them. The rate limits for these keys are on a per-key basis, which means you can not deploy them in front-end applications
+ *
+ * If you want more customized access, such as to raw file URLs for your tournaments, or increased limits, you may request so by filling out this form: https://docs.google.com/forms/d/e/1FAIpQLSeLxbs1UchRGT6Nb6WYD_0gO7821SbRrAnDYjqVOXNrPBrJ4g/viewform
+ */
+export const generatePrivateKey = async () => {
+  const response = await axios.get('https://developers.medal.tv/v1/generate_private_key');
+};
