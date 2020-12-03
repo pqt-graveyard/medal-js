@@ -6,3 +6,5 @@
 [![npm downloads](https://img.shields.io/npm/dm/medal-js.svg)](http://npm-stat.com/charts.html?package=medal-js)
 
 JavaScript library for the Medal.tv API
+
+test2
