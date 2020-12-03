@@ -1,0 +1,15 @@
+# build
+dist/
+
+# dependancies
+node_modules/
+
+# package lock
+# use yarn please!
+package-lock.json
+
+# log files
+*.log
+
+# error files
+*.tsbuildinfo

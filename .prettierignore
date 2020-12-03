@@ -1,0 +1,15 @@
+# ignore everything
+/*
+
+# except these folders and files for the workspace
+!/.github
+!/src
+!/types
+
+# files
+.eslintrc.js
+.prettierrc.js
+jest.config.js
+!package.json
+!README.md
+!tsconfig.json
