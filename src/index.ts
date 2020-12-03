@@ -63,3 +63,5 @@ export const generatePublicKey = async () => {
 export const generatePrivateKey = async () => {
   const response = await axios.get('https://developers.medal.tv/v1/generate_private_key');
 };
+
+export default Medal;
