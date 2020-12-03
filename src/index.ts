@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { configureOptions } from './options';
 
 export class Medal {
   api: AxiosInstance;
@@ -24,7 +25,7 @@ export class Medal {
   public latest(options?: MedalAPI.LatestOptions) {
     return this.api.get<MedalAPI.LatestResponse>('/latest', {
       params: {
-        ...options,
+        ...configureOptions(options),
       },
     });
   }
@@ -32,7 +33,7 @@ export class Medal {
   public search(options: MedalAPI.SearchOptions) {
     return this.api.get<MedalAPI.SearchResponse>('/search', {
       params: {
-        ...options,
+        ...configureOptions(options),
       },
     });
   }
@@ -40,7 +41,7 @@ export class Medal {
   public trending(options?: MedalAPI.TrendingOptions) {
     return this.api.get<MedalAPI.TrendingResponse>('/trending', {
       params: {
-        ...options,
+        ...configureOptions(options),
       },
     });
   }
