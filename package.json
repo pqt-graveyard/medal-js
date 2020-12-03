@@ -1,0 +1,9 @@
+{
+  "name": "medal-js",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/pqt/medal-js",
+  "author": "Austin Paquette <austin.paquette@forcir.com>",
+  "license": "MIT",
+  "private": false
+}
