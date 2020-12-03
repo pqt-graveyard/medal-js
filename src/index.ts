@@ -1,5 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
-import { configureOptions } from './options';
+
+const configureOptions = (options: MedalAPI.LatestOptions | MedalAPI.SearchOptions | MedalAPI.TrendingOptions) => {
+  return {
+    ...options,
+    customStyleClass: options.customStyleClass ? options.customStyleClass.concat(' medal-js') : 'medal-js',
+  };
+};
 
 export class Medal {
   #api: AxiosInstance;
