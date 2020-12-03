@@ -53,6 +53,18 @@ export class Medal {
  */
 export const generatePublicKey = async () => {
   const response = await axios.get('https://developers.medal.tv/v1/generate_public_key');
+  const keyRegex = new RegExp('pub_.*').exec(response.data);
+
+  if (keyRegex !== null) {
+    return {
+      ...response,
+      data: keyRegex[0],
+    };
+  } else {
+    throw {
+      message: 'Something went wrong trying to fetch a generated public key for the Medal API',
+    };
+  }
 };
 
 /**
@@ -62,6 +74,18 @@ export const generatePublicKey = async () => {
  */
 export const generatePrivateKey = async () => {
   const response = await axios.get('https://developers.medal.tv/v1/generate_private_key');
+  const keyRegex = new RegExp('priv_.*').exec(response.data);
+
+  if (keyRegex !== null) {
+    return {
+      ...response,
+      data: keyRegex[0],
+    };
+  } else {
+    throw {
+      message: 'Something went wrong trying to fetch a generated private key for the Medal API',
+    };
+  }
 };
 
 export default Medal;

@@ -27,3 +27,33 @@ const { Medal } = require('medal-js');
 // Instantiate the Medal Class, make sure to include your public or private key
 const medal = new Medal('pub_***');
 ```
+
+## Functions
+
+Once you've instantiated the Medal class you have access to all of the endpoint functions requiring authentication.
+
+```ts
+medal.categories;
+
+medal.latest();
+medal.search();
+medal.trending();
+```
+
+There's also two unauthenticated functions that you may use to programmatically receive a public or private API key.
+
+```ts
+import { generatePublicKey, generatePrivateKey } from 'medal-js';
+// OR
+const { generatePublicKey, generatePrivateKey } = require('medal-js');
+
+generatePublicKey().then((response) => console.log(response.data));
+// Returns: pub_***
+
+generatePrivateKey().then((response) => console.log(response.data));
+// Returns: priv_***
+```
+
+## Global Options
+
+There's a bunch of options that can be applied to all of the endpoint functions.
