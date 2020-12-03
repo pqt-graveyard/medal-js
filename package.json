@@ -1,5 +1,6 @@
 {
   "name": "medal-js",
+  "description": "JavaScript library for the Medal.tv API",
   "version": "0.0.0",
   "main": "dist/index.js",
   "repository": "https://github.com/pqt/medal-js",
