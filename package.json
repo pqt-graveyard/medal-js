@@ -13,7 +13,7 @@
     "lint:fix": "yarn format:write && yarn eslint --fix",
     "eslint": "eslint \"**/*.ts?(x)\"",
     "test": "jest --passWithNoTests",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.0"
