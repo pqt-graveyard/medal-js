@@ -6,5 +6,11 @@
   "repository": "https://github.com/pqt/medal-js",
   "author": "Austin Paquette <austin.paquette@forcir.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "build": "echo \"Pretend to run the build script\"; exit 0",
+    "format": "echo \"Pretend to run the format script\"; exit 0",
+    "lint": "echo \"Pretend to run the lint script\"; exit 0",
+    "test": "echo \"Pretend to run the test script\"; exit 0"
+  }
 }
