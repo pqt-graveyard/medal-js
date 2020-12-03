@@ -1,0 +1,9 @@
+# build
+dist/
+
+# dependancies
+node_modules/
+
+# package lock
+# use yarn please!
+package-lock.json

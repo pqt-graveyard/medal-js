@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es5",
+    "module": "ES2015",
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

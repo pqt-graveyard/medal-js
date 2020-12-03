@@ -1,9 +1,9 @@
-name: "Build Status"
+name: 'Build Status'
 on: push
 
 jobs:
   build:
-    name: "Build Check"
+    name: 'Build Check'
     runs-on: ubuntu-latest
 
     steps:
