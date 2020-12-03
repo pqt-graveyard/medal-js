@@ -1,7 +1,7 @@
 {
   "name": "medal-js",
   "description": "JavaScript library for the Medal.tv API",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "repository": "https://github.com/pqt/medal-js",
   "author": "Austin Paquette <austin.paquette@forcir.com>",
@@ -12,7 +12,8 @@
     "lint": "yarn format && yarn eslint",
     "lint:fix": "yarn format:write && yarn eslint --fix",
     "eslint": "eslint \"**/*.ts?(x)\"",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.0"
