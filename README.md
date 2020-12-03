@@ -58,11 +58,11 @@ There's a bunch of options that can be applied to all of the endpoint functions.
 
 | parameter        | default     | description                                                                                                              |
 | ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
-| steamAppId       | `undefined` | Adds the Steam App Id to every link and iframe returned, so users viewing and sharing the clip can get the game on steam |
-| cta              | `true`      | Hide donation buttons or user-generated call-to-actions on the clip, most commonly used for safety reasons               |
-| autoplay         | `false`     | Specify whether the iframes returned contain the autoplay tag                                                            |
-| loop             | `false`     | Specify whether the iframes returned loop content                                                                        |
-| muted            | `true`      | Specify whether the iframes returned should auto-play sound. By default it does not.                                     |
+| steamappid       | `undefined` | Adds the Steam App Id to every link and iframe returned, so users viewing and sharing the clip can get the game on steam |
+| cta              | `1`         | Hide donation buttons or user-generated call-to-actions on the clip, most commonly used for safety reasons               |
+| autoplay         | `0`         | Specify whether the iframes returned contain the autoplay tag                                                            |
+| loop             | `0`         | Specify whether the iframes returned loop content                                                                        |
+| muted            | `1`         | Specify whether the iframes returned should auto-play sound. By default it does not.                                     |
 | width            | `640`       | The height of the returned clip player                                                                                   |
 | height           | `360`       | The width of the returned clip player                                                                                    |
 | customStyleClass | `medal-js`  | Apply a custom class to your embeddable player. `medal-js` will _always_ be applied (last).                              |
