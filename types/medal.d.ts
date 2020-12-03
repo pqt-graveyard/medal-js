@@ -37,22 +37,22 @@ declare namespace MedalAPI {
     /**
      * Hide donation buttons or user-generated call-to-actions on the clip
      */
-    cta?: number;
+    cta?: 0 | 1;
 
     /**
      * Specify whether whe iframes returned contain the autoplay tag
      */
-    autoplay?: number;
+    autoplay?: 0 | 1;
 
     /**
      * Specify whether the iframes returned loop content
      */
-    loop?: number;
+    loop?: 0 | 1;
 
     /**
      * Specify whether the iframes returned should auto-play sound. By default it does not.
      */
-    muted?: number;
+    muted?: 0 | 1;
 
     /**
      * The height of the returned clip player

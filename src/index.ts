@@ -2,14 +2,14 @@ import axios, { AxiosInstance } from 'axios';
 import { configureOptions } from './options';
 
 export class Medal {
-  api: AxiosInstance;
+  #api: AxiosInstance;
 
   /**
    * @param token the public (pub_***) or private (priv_***) token used to authenticate the requests.
    * @param apiVersion the version identifier used to prefix all endpoint URIs (currently only v1 is avaiable)
    */
   constructor(token: string, apiVersion = 'v1') {
-    this.api = axios.create({
+    this.#api = axios.create({
       baseURL: `https://developers.medal.tv/${apiVersion}`,
       headers: {
         Authorization: token,
@@ -19,11 +19,11 @@ export class Medal {
   }
 
   get categories() {
-    return this.api.get<MedalAPI.CategoryResponse>('/categories');
+    return this.#api.get<MedalAPI.CategoryResponse>('/categories');
   }
 
-  public latest(options?: MedalAPI.LatestOptions) {
-    return this.api.get<MedalAPI.LatestResponse>('/latest', {
+  public latest(options: MedalAPI.LatestOptions = {}) {
+    return this.#api.get<MedalAPI.LatestResponse>('/latest', {
       params: {
         ...configureOptions(options),
       },
@@ -31,15 +31,15 @@ export class Medal {
   }
 
   public search(options: MedalAPI.SearchOptions) {
-    return this.api.get<MedalAPI.SearchResponse>('/search', {
+    return this.#api.get<MedalAPI.SearchResponse>('/search', {
       params: {
         ...configureOptions(options),
       },
     });
   }
 
-  public trending(options?: MedalAPI.TrendingOptions) {
-    return this.api.get<MedalAPI.TrendingResponse>('/trending', {
+  public trending(options: MedalAPI.TrendingOptions = {}) {
+    return this.#api.get<MedalAPI.TrendingResponse>('/trending', {
       params: {
         ...configureOptions(options),
       },
