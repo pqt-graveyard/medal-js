@@ -17,30 +17,13 @@ yarn add medal-js
 npm install medal-js
 ```
 
+## Technical Prologue
+
+This library is built by extending the functionality (and types) of the [axios HTTP client library](https://github.com/axios/axios). It does the heavy lifting for you but it effectively _is_ `axios` at it's core. This means you should find success in both browser and node environments.
+
 ## Usage
 
-```ts
-import { Medal } from 'medal-js';
-// OR
-const { Medal } = require('medal-js');
-
-// Instantiate the Medal Class, make sure to include your public or private key
-const medal = new Medal('pub_***');
-```
-
-## Functions
-
-Once you've instantiated the Medal class you have access to all of the endpoint functions requiring authentication.
-
-```ts
-medal.categories; // <-- Note this is a getter. No function call is required. IT IS NOT categories()
-
-medal.latest();
-medal.search();
-medal.trending();
-```
-
-There's also two unauthenticated functions that you may use to receive a public or private API key.
+There are two unauthenticated functions that you may use right to receive a public or private API key.
 
 ```ts
 import { generatePublicKey, generatePrivateKey } from 'medal-js';
@@ -51,6 +34,74 @@ generatePublicKey().then((response) => console.log(response.data));
 generatePrivateKey().then((response) => console.log(response.data));
 // Returns: priv_***
 ```
+
+This key is required for creating an instance of a Medal class.
+
+```ts
+import { Medal } from 'medal-js';
+// OR
+const { Medal } = require('medal-js');
+
+// Construct the Medal Class instance, you will be required to include your public or private key
+const medal = new Medal('pub_***');
+```
+
+Once you've instantiated the Medal class you have access to all of the endpoint functions requiring authentication.
+
+## `Medal.categories`
+
+**Note: this is a getter, NOT a function call. The lack of `()` is not a typo.**
+
+_No customization parameters_.
+
+## `Medal.latest()`
+
+| parameter  | type     | default     | description |
+| ---------- | -------- | ----------- | ----------- |
+| userId     | `number` | `undefined` |             |
+| categoryId | `number` | `undefined` |             |
+| limit      | `number` | `undefined` |             |
+| offset     | `number` | `undefined` |             |
+
+**Example**
+
+```ts
+import { Medal } from 'medal-js';
+
+const medal = new Medal('pub_***');
+
+medal.latest({ categoryId: 62, limit: 1 }).then((response) => console.log(response.data));
+```
+
+`response.data`
+
+```json
+{
+  "contentObjects": [
+    {
+      "contentId": "cid4954089",
+      "rawFileUrl": "not_authorized",
+      "contentTitle": "Testing fortnite w/keyboard, damn is hard lol",
+      "contentViews": 1836,
+      "contentLikes": 10,
+      "categoryId": 62,
+      "videoLengthSeconds": 10,
+      "createdTimestamp": 1563233109000,
+      "directClipUrl": "https://medal.tv/clip/4954089/5xAyYcy7Spquc7Jz",
+      "embedIframeUrl": "<iframe width='640' height='360' src='https://medal.tv/clip/4954089/UUzr8lZ41i8pPVC4?loop=1&autoplay=1&cta=1' frameborder='0' allow='autoplay' allowfullscreen class='medal-clip' id='contentId-4954089'></iframe>",
+      "credits": "Credits to ODarwed (https://medal.tv/users/452854)"
+    }
+  ]
+}
+```
+
+## `Medal.search()`
+
+## `Medal.trending()`
+
+## Functions
+
+Once you've instantiated the Medal class you have access to all of the endpoint functions requiring authentication.
 
 ## Global Options
 
