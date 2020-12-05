@@ -7,6 +7,17 @@
 
 JavaScript library for the [Medal.tv](https://medal.tv) [REST API](https://docs.medal.tv/api)
 
+## Table of Contents
+
+- Installation
+- Technical Prologue
+- Usage
+- `Medal.categories`
+- `Medal.latest()`
+- `Medal.search()`
+- `Medal.trending()`
+- Global Options
+
 ## Installation
 
 You can add the library as a dependancy to your project using Yarn or NPM.
@@ -54,14 +65,60 @@ Once you've instantiated the Medal class you have access to all of the endpoint 
 
 _No customization parameters_.
 
+**Example**
+
+```ts
+import { Medal } from 'medal-js';
+
+const medal = new Medal('pub_***');
+
+medal.categories.then((response) => console.log(response.data));
+```
+
+`response.data` will look something like:
+
+```json
+[
+  {
+    "categoryId": 0,
+    "categoryName": "All",
+    "alternativeName": "All",
+    "activeSessions": 0,
+    "slug": "all"
+  },
+  {
+    "categoryId": 1,
+    "categoryName": "Medal Plays",
+    "alternativeName": "Medal Plays",
+    "activeSessions": 0,
+    "slug": "medal-plays"
+  },
+  {
+    "categoryId": 2,
+    "categoryName": "Following",
+    "alternativeName": "Following",
+    "activeSessions": 0,
+    "slug": "following"
+  },
+  {
+    "categoryId": 3,
+    "categoryName": "Discover",
+    "alternativeName": "Discover",
+    "activeSessions": 32,
+    "slug": "discover"
+  }
+  // ...
+]
+```
+
 ## `Medal.latest()`
 
-| parameter  | type     | default     | description |
-| ---------- | -------- | ----------- | ----------- |
-| userId     | `number` | `undefined` |             |
-| categoryId | `number` | `undefined` |             |
-| limit      | `number` | `undefined` |             |
-| offset     | `number` | `undefined` |             |
+| parameter  | required | type     | default     | description |
+| ---------- | -------- | -------- | ----------- | ----------- |
+| userId     | no       | `number` | `undefined` |             |
+| categoryId | no       | `number` | `undefined` |             |
+| limit      | no       | `number` | `undefined` |             |
+| offset     | no       | `number` | `undefined` |             |
 
 **Example**
 
@@ -70,10 +127,108 @@ import { Medal } from 'medal-js';
 
 const medal = new Medal('pub_***');
 
-medal.latest({ categoryId: 62, limit: 1 }).then((response) => console.log(response.data));
+medal.latest({ userId: 12597, categoryId: 10, limit: 2 }).then((response) => console.log(response.data));
+```
+
+`response.data` will look something like:
+
+```json
+{
+  "contentObjects": [
+    {
+      "contentId": "cid5042841",
+      "rawFileUrl": "not_authorized",
+      "contentTitle": "that winning team name...",
+      "contentViews": 47,
+      "contentLikes": 1,
+      "categoryId": 10,
+      "videoLengthSeconds": 15,
+      "createdTimestamp": 1563692235000,
+      "directClipUrl": "https://medal.tv/clip/5042841/LV0xUt2QyowNBQXL",
+      "embedIframeUrl": "<iframe width='640' height='360' src='https://medal.tv/clip/5042841/Z6XRiXu8BKwSrDYW?loop=1&autoplay=1&cta=1' frameborder='0' allow='autoplay' allowfullscreen class='medal-clip' id='contentId-5042841'></iframe>",
+      "credits": "Credits to Galkon (https://medal.tv/users/12597)"
+    },
+    {
+      "contentId": "cid5037877",
+      "rawFileUrl": "not_authorized",
+      "contentTitle": "lmao so close",
+      "contentViews": 42,
+      "contentLikes": 4,
+      "categoryId": 10,
+      "videoLengthSeconds": 14,
+      "createdTimestamp": 1563668946000,
+      "directClipUrl": "https://medal.tv/clip/5037877/W98gfTlhKN7bw2DG",
+      "embedIframeCode": "<iframe width='640' height='360' src='https://medal.tv/clip/5037877/sFfcDeWAI9n0B8Yy?loop=1&autoplay=1&cta=1' frameborder='0' allow='autoplay' allowfullscreen class='medal-clip' id='contentId-5037877'></iframe>",
+      "credits": "Credits to Galkon (https://medal.tv/users/12597)"
+    }
+  ]
+}
+```
+
+## `Medal.search()`
+
+**Example**
+
+```ts
+import { Medal } from 'medal-js';
+
+const medal = new Medal('pub_***');
+
+medal
+  .search({
+    text: 'flip reset',
+    steamappid: 252950,
+    autoplay: 1,
+    loop: 1,
+    cta: 0,
+    customStyleClass: 'rlclip',
+    offset: 100,
+    limit: 1,
+  })
+  .then((response) => console.log(response.data));
 ```
 
 `response.data`
+
+```json
+{
+  "contentObjects": [
+    {
+      "contentId": "cid3471744",
+      "rawFileUrl": "not_authorized",
+      "contentTitle": "flip reset",
+      "contentViews": 20,
+      "contentLikes": 0,
+      "categoryId": 10,
+      "videoLengthSeconds": 15,
+      "createdTimestamp": 1550037169000,
+      "directClipUrl": "https://medal.tv/clip/3471744/2PaSuhVQX5OWKPnO",
+      "embedIframeCode": "<iframe width='640' height='360' src='https://medal.tv/clip/3471744/vcMONks6G5T412oH?loop=1&autoplay=1&cta=0&steamappid=252950' frameborder='0' allow='autoplay' allowfullscreen class='rlclip' id='contentId-3471744'></iframe>",
+      "credits": "Credits to Hakugei (https://medal.tv/users/233543)"
+    }
+  ]
+}
+```
+
+| parameter | required | type     | default     | description |
+| --------- | -------- | -------- | ----------- | ----------- |
+| text      | **yes**  | `string` |             |             |
+| limit     | no       | `number` | `undefined` |             |
+| offset    | no       | `number` | `undefined` |             |
+
+## `Medal.trending()`
+
+**Example**
+
+```ts
+import { Medal } from 'medal-js';
+
+const medal = new Medal('pub_***');
+
+medal.trending({ categoryId: 62, limit: 1 }).then((response) => console.log(response.data));
+```
+
+`response.data` will look something like:
 
 ```json
 {
@@ -95,28 +250,26 @@ medal.latest({ categoryId: 62, limit: 1 }).then((response) => console.log(respon
 }
 ```
 
-## `Medal.search()`
-
-## `Medal.trending()`
-
-## Functions
-
-Once you've instantiated the Medal class you have access to all of the endpoint functions requiring authentication.
+| parameter  | required | type     | default     | description |
+| ---------- | -------- | -------- | ----------- | ----------- |
+| categoryId | no       | `number` | `undefined` |             |
+| limit      | no       | `number` | `undefined` |             |
+| offset     | no       | `number` | `undefined` |             |
 
 ## Global Options
 
 There's a bunch of options that can be applied to all of the endpoint functions. **None of these options are required**, they are ALL optional.
 
-| parameter        | default     | description                                                                                                             |
-| ---------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
-| steamappid       | `undefined` | Adds the Steam AppId to every link and iframe returned, so users viewing and sharing the clip can get the game on steam |
-| cta              | `1`         | Hide donation buttons or user-generated call-to-actions on the clip, most commonly used for safety reasons              |
-| autoplay         | `0`         | Specify whether the iframes returned contain the autoplay tag                                                           |
-| loop             | `0`         | Specify whether the iframes returned loop content                                                                       |
-| muted            | `1`         | Specify whether the iframes returned should auto-play sound. By default it does not.                                    |
-| width            | `640`       | The height of the returned clip player                                                                                  |
-| height           | `360`       | The width of the returned clip player                                                                                   |
-| customStyleClass | `medal-js`  | Apply a custom class to your embeddable player. `medal-js` will _always_ be applied (last).                             |
+| parameter        | required | type     | default     | description                                                                                                             |
+| ---------------- | -------- | -------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
+| steamappid       | no       | `number` | `undefined` | Adds the Steam AppId to every link and iframe returned, so users viewing and sharing the clip can get the game on steam |
+| cta              | no       | `number` | `1`         | Hide donation buttons or user-generated call-to-actions on the clip, most commonly used for safety reasons              |
+| autoplay         | no       | `number` | `0`         | Specify whether the iframes returned contain the autoplay tag                                                           |
+| loop             | no       | `number` | `0`         | Specify whether the iframes returned loop content                                                                       |
+| muted            | no       | `number` | `1`         | Specify whether the iframes returned should auto-play sound. By default it does not.                                    |
+| width            | no       | `number` | `640`       | The height of the returned clip player                                                                                  |
+| height           | no       | `number` | `360`       | The width of the returned clip player                                                                                   |
+| customStyleClass | no       | `string` | `medal-js`  | Apply a custom class to your embeddable player. `medal-js` will _always_ be applied (last).                             |
 
 ## Example
 
