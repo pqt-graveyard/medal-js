@@ -323,7 +323,7 @@ Here's a replica of the above example, just using async/await.
 (async () => {
   const medal = new Medal('pub_***');
 
-  const latest = await medal.latest({
+  const { data: latest } = await medal.latest({
     categoryId: 10,
     limit: 1,
     offset: 5,
