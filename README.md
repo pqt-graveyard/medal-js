@@ -18,7 +18,7 @@ JavaScript library for the [Medal.tv](https://medal.tv) [REST API](https://docs.
 - [`Medal.trending()`](#medaltrending)
 - [Global Options](#global-options)
 - [Example](#example)
-- [Async Example](#async-example)
+- [Async Example](#asyncawait-example)
 
 ## Installation
 
