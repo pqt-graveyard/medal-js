@@ -9,14 +9,16 @@ JavaScript library for the [Medal.tv](https://medal.tv) [REST API](https://docs.
 
 ## Table of Contents
 
-- Installation
-- Technical Prologue
-- Usage
-- `Medal.categories`
-- `Medal.latest()`
-- `Medal.search()`
-- `Medal.trending()`
-- Global Options
+- [Installation](#installation)
+- [Technical Prologue](#technical-prologue)
+- [Usage](#usage)
+- [`Medal.categories`](#medalcategories)
+- [`Medal.latest()`](#medallatest)
+- [`Medal.search()`](#medalsearch)
+- [`Medal.trending()`](#medaltrending)
+- [Global Options](#global-options)
+- [Example](#example)
+- [Async Example](#async-example)
 
 ## Installation
 
@@ -288,6 +290,48 @@ new Medal('pub_***')
     customStyleClass: 'custom-class-name',
   })
   .then((response) => console.log(response.data));
+```
+
+```json
+{
+  "contentObjects": [
+    {
+      "contentId": "cid37920939",
+      "rawFileUrl": "not_authorized",
+      "rawFileUrlLowRes": "not_authorized",
+      "unbrandedFileUrl": "not_authorized",
+      "contentTitle": "carry",
+      "contentViews": 2,
+      "contentLikes": 0,
+      "contentThumbnail": "https://cdn.medal.tv/12667981/thumbnail-37920939-360p.jpg",
+      "categoryId": 10,
+      "videoLengthSeconds": 15,
+      "createdTimestamp": 1606969604000,
+      "directClipUrl": "https://medal.tv/clip/37920939/7Ok8QtplXsccgV3m",
+      "embedIframeCode": "<iframe width='640' height='360' src='https://medal.tv/clip/37920939/rLWGbYREMxWrtOOW?loop=1&autoplay=1&muted=1&cta=1' frameborder='0' allow='autoplay' allowfullscreen class='custom-class-name medal-js' id='cid37920939'></iframe>",
+      "credits": "Credits to GPS TRASHER (https://medal.tv/users/12667981)"
+    }
+  ]
+}
+```
+
+## Async/Await Example
+
+Here's a replica of the above example, just using async/await.
+
+```ts
+(async () => {
+  const medal = new Medal('pub_***');
+
+  const latest = await medal.latest({
+    categoryId: 10,
+    limit: 1,
+    offset: 5,
+    customStyleClass: 'custom-class-name',
+  });
+
+  console.log(latest);
+})();
 ```
 
 ```json
