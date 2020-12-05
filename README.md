@@ -34,7 +34,7 @@ This library is built by extending the functionality (and types) of the [axios H
 
 ## Usage
 
-There are two unauthenticated functions that you may use right to receive a public or private API key.
+There are two unauthenticated functions that you may use right away to receive a public or private API key.
 
 ```ts
 import { generatePublicKey, generatePrivateKey } from 'medal-js';
