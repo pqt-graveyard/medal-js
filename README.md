@@ -1,3 +1,6 @@
+# ⚠️ This project is being discontinued and archived.
+
+
 # Medal.tv JavaScript API Wrapper
 
 [![npm version](https://img.shields.io/npm/v/medal-js.svg)](https://www.npmjs.org/package/medal-js)
